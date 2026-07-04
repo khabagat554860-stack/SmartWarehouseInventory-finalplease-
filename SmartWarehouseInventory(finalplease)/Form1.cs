@@ -10,6 +10,7 @@ namespace SmartWarehouseInventory_finalplease_
         public Form1()
         {
             InitializeComponent();
+
         }
         private void LoadInventory()
         {
@@ -72,8 +73,6 @@ namespace SmartWarehouseInventory_finalplease_
                 string itemType = cmbItemType.Text;
                 string special = txtSpecial.Text;
 
-                InventoryItem Item;
-
                 if (itemType == "Perishable")
                 {
                     double temperature = double.Parse(special);
@@ -118,18 +117,13 @@ namespace SmartWarehouseInventory_finalplease_
             }
             catch (FormatException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Please enter valid numbers only.");
             }
             finally
             {
                 con.Close();
             }
 
-        }
-
-        private void btnLoad_Click(object sender, EventArgs e)
-        {
-            LoadInventory();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -138,21 +132,32 @@ namespace SmartWarehouseInventory_finalplease_
 
             try
             {
+                if (string.IsNullOrEmpty(txtItemID.Text))
+                {
+                    MessageBox.Show("Please enter the Item ID to delete.");
+                    return;
+                }
+
                 con.Open();
 
-                string query = "DELETE FROM InventoryItems WHERE ItemID=@ItemID";
+                string query = "DELETE FROM InventoryItems WHERE ItemID = @ItemID";
 
                 SqlCommand cmd = new SqlCommand(query, con);
-
                 cmd.Parameters.AddWithValue("@ItemID", txtItemID.Text);
 
-                cmd.ExecuteNonQuery();
+                int rowsAffected = cmd.ExecuteNonQuery();
 
-                MessageBox.Show("Item deleted successfully!");
-
-                LoadInventory();
+                if (rowsAffected > 0)
+                {
+                    MessageBox.Show("Item deleted successfully!");
+                    LoadInventory();
+                }
+                else
+                {
+                    MessageBox.Show("Item ID not found.");
+                }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -160,6 +165,11 @@ namespace SmartWarehouseInventory_finalplease_
             {
                 con.Close();
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            LoadInventory();
         }
     }
 }

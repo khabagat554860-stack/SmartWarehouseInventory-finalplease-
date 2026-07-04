@@ -66,7 +66,7 @@
             flowLayoutPanel1.Dock = DockStyle.Top;
             flowLayoutPanel1.Location = new Point(0, 0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(984, 70);
+            flowLayoutPanel1.Size = new Size(984, 64);
             flowLayoutPanel1.TabIndex = 0;
             // 
             // label1
@@ -76,9 +76,9 @@
             label1.ForeColor = Color.White;
             label1.Location = new Point(3, 0);
             label1.Name = "label1";
-            label1.Size = new Size(378, 37);
+            label1.Size = new Size(474, 37);
             label1.TabIndex = 0;
-            label1.Text = "Smart Warehouse Inventory";
+            label1.Text = "Smart Warehouse Inventory Ledger";
             // 
             // panel1
             // 
@@ -103,9 +103,9 @@
             panel1.Controls.Add(txtItemID);
             panel1.Controls.Add(lblItemID);
             panel1.Dock = DockStyle.Left;
-            panel1.Location = new Point(0, 70);
+            panel1.Location = new Point(0, 64);
             panel1.Name = "panel1";
-            panel1.Size = new Size(350, 541);
+            panel1.Size = new Size(350, 547);
             panel1.TabIndex = 1;
             // 
             // btnTest
@@ -157,7 +157,6 @@
             btnLoad.TabIndex = 15;
             btnLoad.Text = "Load / Refresh Grid";
             btnLoad.UseVisualStyleBackColor = false;
-            btnLoad.Click += btnLoad_Click;
             // 
             // btnInsert
             // 
@@ -314,9 +313,9 @@
             panel2.BackColor = Color.Gainsboro;
             panel2.Controls.Add(dgvInventory);
             panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(350, 70);
+            panel2.Location = new Point(350, 64);
             panel2.Name = "panel2";
-            panel2.Size = new Size(634, 541);
+            panel2.Size = new Size(634, 547);
             panel2.TabIndex = 2;
             // 
             // dgvInventory
@@ -325,10 +324,10 @@
             dgvInventory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvInventory.Dock = DockStyle.Fill;
             dgvInventory.Location = new Point(0, 0);
+            dgvInventory.MultiSelect = false;
             dgvInventory.Name = "dgvInventory";
-            dgvInventory.ReadOnly = true;
             dgvInventory.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvInventory.Size = new Size(634, 541);
+            dgvInventory.Size = new Size(634, 547);
             dgvInventory.TabIndex = 0;
             // 
             // Form1
@@ -343,6 +342,7 @@
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Smart Warehouse Inventory";
+            Load += Form1_Load;
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel1.PerformLayout();
             panel1.ResumeLayout(false);
@@ -377,7 +377,7 @@
         private Label lblStorageFeeTitle;
         private TextBox txtSpecial;
         private Label label2;
-        private DataGridView dgvInventory;
         private Button btnTest;
+        private DataGridView dgvInventory;
     }
 }
